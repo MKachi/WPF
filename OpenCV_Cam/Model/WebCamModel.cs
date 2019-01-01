@@ -17,10 +17,16 @@ namespace OpenCV_Cam.Model
     {
         private CvCapture       _capture;
         private DispatcherTimer _updater;
-        private WriteableBitmap _writeBitmap;
         private IplImage        _source;
 
-        public void Init(int camIndex)
+        private WriteableBitmap _writeBitmap;
+        public WriteableBitmap CamScreen
+        {
+            get { return _writeBitmap; }
+            set { SetProperty(ref _writeBitmap, value); }
+        }
+
+        public void Init(int camIndex, int updateInterval)
         {
             try
             {
@@ -30,7 +36,7 @@ namespace OpenCV_Cam.Model
                     96, 96, 
                     PixelFormats.Bgr24, null);
                 _updater = new DispatcherTimer();
-                _updater.Interval = new TimeSpan(0, 0, 0, 0, 33);
+                _updater.Interval = new TimeSpan(0, 0, 0, 0, updateInterval);
                 _updater.Tick += new EventHandler(Update);
             }
             catch (Exception except)

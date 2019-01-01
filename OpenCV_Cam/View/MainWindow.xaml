@@ -11,6 +11,32 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Margin="5"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Margin="5" Source="{Binding WebCam.CamScreen}"/>
+            <ListView Grid.Row="1" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                      ScrollViewer.CanContentScroll="True" Margin="5">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Bottom" Text="{Binding Filename}"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
+            <Button Content="{Binding RecodeButtonContent}" Command="{Binding RecodeCommand}" MinHeight="20" Margin="0,0,0,5"/>
+            <Button Content="Snapshot" MinHeight="20" Margin="0,0,0,5"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenCV_Cam.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace OpenCV_Cam
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

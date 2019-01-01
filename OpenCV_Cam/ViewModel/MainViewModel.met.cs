@@ -12,12 +12,27 @@ namespace OpenCV_Cam.ViewModel
     {
         public MainViewModel()
         {
-            _webCam = new WebCamModel();
-            _webCam.Init(0);
+            RecodeButtonContent = "Start Recode";
+            WebCam = new WebCamModel();
+            WebCam.Init(0, 30);
         }
         ~MainViewModel()
         {
-            _webCam.Destroy();
+            WebCam.Destroy();
+        }
+
+        private void Recode()
+        {
+            if (RecodeButtonContent.Equals("Start Recode"))
+            {
+                WebCam.Start();
+                RecodeButtonContent = "Stop Recode";
+            }
+            else
+            {
+                WebCam.Stop();
+                RecodeButtonContent = "Start Recode";
+            }
         }
     }
 }
