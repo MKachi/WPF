@@ -35,8 +35,9 @@
             </ListView>
         </Grid>
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
-            <Button Content="{Binding RecodeButtonContent}" Command="{Binding RecodeCommand}" MinHeight="20" Margin="0,0,0,5"/>
-            <Button Content="Snapshot" MinHeight="20" Margin="0,0,0,5"/>
+            <Button Content="{Binding CamContent}" Command="{Binding CamCommand}" MinHeight="20" Margin="0,0,0,5"/>
+            <Button Content="Snapshot" Command="{Binding SnapshotCommand}" MinHeight="20" Margin="0,0,0,5"/>
+            <Button Content="{Binding RecodeContent}" Command="{Binding RecodeCommand}" MinHeight="20" Margin="0,0,0,5"/>
         </StackPanel>
     </Grid>
 </Window>

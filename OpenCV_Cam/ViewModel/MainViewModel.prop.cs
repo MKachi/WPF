@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace OpenCV_Cam.ViewModel
 {
@@ -17,11 +18,18 @@ namespace OpenCV_Cam.ViewModel
             set { SetProperty(ref _webCam, value); }
         }
 
-        private string _recodeButtonContent;
-        public string RecodeButtonContent
+        private string _camContent;
+        public string CamContent
         {
-            get { return _recodeButtonContent; }
-            set { SetProperty(ref _recodeButtonContent, value); }
+            get { return _camContent; }
+            set { SetProperty(ref _camContent, value); }
+        }
+
+        private string _recodeContent;
+        public string RecodeContent
+        {
+            get { return _recodeContent; }
+            set { SetProperty(ref _recodeContent, value); }
         }
     }
 }

@@ -15,15 +15,21 @@ namespace OpenCV_Cam.Model
 {
     public class WebCamModel : ObservedObject
     {
-        private CvCapture       _capture;
-        private DispatcherTimer _updater;
-        private IplImage        _source;
+        private CvCapture       _capture = null;
+        private DispatcherTimer _updater = null;
 
-        private WriteableBitmap _writeBitmap;
-        public WriteableBitmap CamScreen
+        private bool            _recoding = false;
+        private CvVideoWriter   _recoder = null;
+
+        private WriteableBitmap _writeBitmap = null;
+        public WriteableBitmap  CamScreen
         {
             get { return _writeBitmap; }
             set { SetProperty(ref _writeBitmap, value); }
+        }
+        public IplImage         Source
+        {
+            get { return _capture.QueryFrame(); }
         }
 
         public void Init(int camIndex, int updateInterval)
@@ -31,7 +37,7 @@ namespace OpenCV_Cam.Model
             try
             {
                 _capture = CvCapture.FromCamera(CaptureDevice.Any, camIndex);
-                _writeBitmap = new WriteableBitmap(
+                CamScreen = new WriteableBitmap(
                     _capture.FrameWidth, _capture.FrameHeight, 
                     96, 96, 
                     PixelFormats.Bgr24, null);
@@ -76,11 +82,40 @@ namespace OpenCV_Cam.Model
             }
         }
 
+        public void Snapshot(string filename)
+        {
+            Cv.SaveImage(filename, Source);
+        }
+
+        public void StartRecode(string filename, double fps)
+        {
+            _recoder = new CvVideoWriter(filename, FourCC.XVID, fps,
+                    new CvSize(CamScreen.PixelWidth, CamScreen.PixelHeight), true);
+            _recoding = true;
+        }
+        public void StopRecode()
+        {
+            if (!ReferenceEquals(_recoder, null))
+            {
+                _recoder.Dispose();
+                _recoder = null;
+                _recoding = false;
+            }
+        }
+
         private void Update(object sender, EventArgs e)
         {
-            using (_source = _capture.QueryFrame())
+            using (IplImage image = _capture.QueryFrame())
             {
-                WriteableBitmapConverter.ToWriteableBitmap(_source, _writeBitmap);
+                WriteableBitmapConverter.ToWriteableBitmap(image, _writeBitmap);
+            }
+
+            if (_recoding)
+            {
+                using (IplImage image = _capture.QueryFrame())
+                {
+                    _recoder.WriteFrame(image);
+                }
             }
         }
     }
