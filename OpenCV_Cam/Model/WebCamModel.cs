@@ -18,18 +18,21 @@ namespace OpenCV_Cam.Model
         private CvCapture       _capture = null;
         private DispatcherTimer _updater = null;
 
-        private bool            _recoding = false;
+        private bool            _recoded = false;
         private CvVideoWriter   _recoder = null;
+
+        private bool            _captured = false;
+        public bool             IsCapture
+        {
+            get { return _captured; }
+            set { SetProperty(ref _captured, value); }
+        }
 
         private WriteableBitmap _writeBitmap = null;
         public WriteableBitmap  CamScreen
         {
             get { return _writeBitmap; }
             set { SetProperty(ref _writeBitmap, value); }
-        }
-        public IplImage         Source
-        {
-            get { return _capture.QueryFrame(); }
         }
 
         public void Init(int camIndex, int updateInterval)
@@ -71,6 +74,7 @@ namespace OpenCV_Cam.Model
             {
                 _updater.IsEnabled = true;
                 _updater.Start();
+                IsCapture = true;
             }
         }
         public void Stop()
@@ -79,19 +83,20 @@ namespace OpenCV_Cam.Model
             {
                 _updater.Stop();
                 _updater.IsEnabled = false;
+                IsCapture = false;
             }
         }
 
         public void Snapshot(string filename)
         {
-            Cv.SaveImage(filename, Source);
+            Cv.SaveImage(filename, _capture.QueryFrame());
         }
 
         public void StartRecode(string filename, double fps)
         {
             _recoder = new CvVideoWriter(filename, FourCC.XVID, fps,
                     new CvSize(CamScreen.PixelWidth, CamScreen.PixelHeight), true);
-            _recoding = true;
+            _recoded = true;
         }
         public void StopRecode()
         {
@@ -99,7 +104,7 @@ namespace OpenCV_Cam.Model
             {
                 _recoder.Dispose();
                 _recoder = null;
-                _recoding = false;
+                _recoded = false;
             }
         }
 
@@ -110,7 +115,7 @@ namespace OpenCV_Cam.Model
                 WriteableBitmapConverter.ToWriteableBitmap(image, _writeBitmap);
             }
 
-            if (_recoding)
+            if (_recoded)
             {
                 using (IplImage image = _capture.QueryFrame())
                 {
