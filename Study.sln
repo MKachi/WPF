@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneColumnMultiCell", "OneCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM", "MVVM\MVVM.csproj", "{9F45E682-9D04-4C21-9BEE-B0D77648F74D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCV_Cam", "OpenCV_Cam\OpenCV_Cam.csproj", "{2488C574-AF0E-4654-9C74-A656940BD7E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{9F45E682-9D04-4C21-9BEE-B0D77648F74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F45E682-9D04-4C21-9BEE-B0D77648F74D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F45E682-9D04-4C21-9BEE-B0D77648F74D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2488C574-AF0E-4654-9C74-A656940BD7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2488C574-AF0E-4654-9C74-A656940BD7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2488C574-AF0E-4654-9C74-A656940BD7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2488C574-AF0E-4654-9C74-A656940BD7E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
