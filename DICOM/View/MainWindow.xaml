@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DICOM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="480" Width="480">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Load to jpg" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Load to DCM" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Save to jpg" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Save to DCM" Padding="10, 0" Margin="0"/>
+        </StackPanel>
+        <Image Grid.Row="1" Margin="5"/>
     </Grid>
 </Window>
