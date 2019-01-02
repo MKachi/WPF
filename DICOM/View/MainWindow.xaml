@@ -12,11 +12,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="Load to jpg" Padding="10, 0" Margin="0,0,5,0"/>
-            <Button Content="Load to DCM" Padding="10, 0" Margin="0,0,5,0"/>
-            <Button Content="Save to jpg" Padding="10, 0" Margin="0,0,5,0"/>
-            <Button Content="Save to DCM" Padding="10, 0" Margin="0"/>
+            <Button Content="Load to jpg" Command="{Binding LoadJpgCommand}" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Load to DCM" Command="{Binding LoadDCMCommand}" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Save to jpg" Command="{Binding SaveJpgCommand}" Padding="10, 0" Margin="0,0,5,0"/>
+            <Button Content="Save to DCM" Command="{Binding SaveDCMCommand}" Padding="10, 0" Margin="0"/>
         </StackPanel>
-        <Image Grid.Row="1" Margin="5"/>
+        <Image Grid.Row="1" Margin="5" Source="{Binding DisplayImage}"/>
     </Grid>
 </Window>
