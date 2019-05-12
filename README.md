@@ -1,2 +1,2 @@
-# WPF-Study
+# WPF
 WPF Study repository.
